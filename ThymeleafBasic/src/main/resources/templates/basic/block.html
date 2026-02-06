@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- div 여러 개를 한 번에 묶어 each 사용 -->
+<th:block th:each="user : ${users}">
+    <div>
+        사용자 이름 <span th:text="${user.name}"></span>
+        사용자 나이 <span th:text="${user.age}"></span>
+    </div>
+    <div>
+        요약 <span th:text="${user.name} + ' / ' + ${user.age}"></span>
+    </div>
+</th:block>
+</body>
+</html>
