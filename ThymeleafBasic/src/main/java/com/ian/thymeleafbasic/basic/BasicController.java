@@ -57,7 +57,7 @@ public class BasicController {
 
     @Getter
     @AllArgsConstructor
-    static class User {
+    public static class User {
 
         private String name;
         private int age;
@@ -157,5 +157,19 @@ public class BasicController {
         model.addAttribute("users", users);
 
         return "basic/block";
+    }
+
+    @GetMapping("/javascript")
+    public String javascript(Model model) {
+        model.addAttribute("user", new User("user", 20));
+
+        List<User> users = new ArrayList<>();
+        users.add(new User("userA", 10));
+        users.add(new User("userB", 20));
+        users.add(new User("userC", 30));
+
+        model.addAttribute("users", users);
+
+        return "basic/javascript";
     }
 }
