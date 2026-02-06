@@ -1,12 +1,17 @@
 package com.ian.thymeleafbasic.basic;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,5 +61,24 @@ public class BasicController {
 
         private String name;
         private int age;
+    }
+
+    @GetMapping("/basic-objects")
+    public String basicObjects(
+            HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model
+    ) {
+        model.addAttribute("request", request); // 스프링 부트 3 이전에는 생략이 가능했으나, 이후부터 생략 불가능
+        model.addAttribute("response", response); // 스프링 부트 3 이전에는 생략이 가능했으나, 이후부터 생략 불가능
+        model.addAttribute("servletContext", request.getServletContext()); // 스프링 부트 3 이전에는 생략이 가능했으나, 이후부터 생략 불가능
+        session.setAttribute("sessionData", "Hello Session");
+
+        return "basic/basic-objects";
+    }
+
+    @Component("helloBean")
+    static class HelloBean {
+        public String hello(String data) {
+            return "Hello " + data;
+        }
     }
 }
